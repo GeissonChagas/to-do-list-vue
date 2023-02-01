@@ -1,34 +1,33 @@
-atividades = [
-    {
-        name: 'Estudar Vue.js',
-    }
-]
 
-const listaDeTarefas = {
-
+const todosApp = {
     data() {
         return {
-            atividades: window.atividades,
-            novaAtividade: {
-
+            todos: [],
+            newTodo: {
+                done: false
             }
         }
     },
-
     methods: {
-        addAtividade: function() {
-            if (!(this.novaAtividade.name)) {
-                alert("O input deve ser preenchido!")
+        addTodo: function() {
+            if (this.newTodo.text) {
+                this.todos.push(this.newTodo);
+                this.newTodo = {
+                    done: false
+                };
+                localStorage.setItem("todos", JSON.stringify(this.todos));
             } else {
-                this.atividades.push(this.novaAtividade);
-                this.novaAtividade = {};
+                alert("A descrição da tarefa é obrigatória");
             }
-        },
-        excluiAtividade: function() {
-            this.atividades.remove(atividades);
         }
+    },
+    created() {
+        this.todos = localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : this.todos;
+    },
+    updated() {
+        localStorage.setItem("todos", JSON.stringify(this.todos));
     }
 
-};
+}
 
-Vue.createApp(listaDeTarefas).mount('#app');
+Vue.createApp(todosApp).mount('#app');
