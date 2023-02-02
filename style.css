@@ -85,6 +85,14 @@ main .all-todos .single-todo.done p {
     text-decoration: line-through;
 }
 
+main .all-todos .single-todo .check {
+    display: flex;
+    align-items: center;
+    position: relative;
+    bottom: 13px;
+    right: 10px;        
+}
+
 main .all-todos .single-todo button.remove {
     width: 12px;
     height: 12px;
